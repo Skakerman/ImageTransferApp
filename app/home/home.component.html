@@ -1,0 +1,11 @@
+<ActionBar title="Home" class="action-bar">
+</ActionBar>
+
+<FlexboxLayout flexDirection="column">
+    <ScrollView flexGrow="1" id="scrollview">
+        <FlexboxLayout flexWrap="wrap" flexDirection="row" justifyContent="space-around">
+            <Image *ngFor="let pic of fileList" width="30%" [src]="pic.viewUrl" 
+                    marginBottom="5" (tap)="picClick(pic)" backgroundColor="green"></Image>
+        </FlexboxLayout>
+    </ScrollView>
+</FlexboxLayout>

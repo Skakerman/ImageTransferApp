@@ -1,0 +1,16 @@
+<ActionBar title="Single" class="action-bar">
+    <ActionItem (tap)="onSave()"
+        android.systemIcon="ic_menu_save" android.position="actionbar"></ActionItem>
+</ActionBar>
+
+<StackLayout>
+    <Image src="{{ viewUrl }}"></Image>
+    <Label text="{{ fileName }}"></Label>
+</StackLayout>
+<!-- <FlexboxLayout flexDirection="column">
+    <ScrollView flexGrow="1" id="scrollview">
+        <FlexboxLayout flexWrap="wrap" flexDirection="row" justifyContent="space-around">
+            <Image *ngFor="let pic of fileList" width="30%" [src]="pic.viewUrl" marginBottom="5" (tap)="picClick(pic)" backgroundColor="green"></Image>
+        </FlexboxLayout>
+    </ScrollView>
+</FlexboxLayout> -->
