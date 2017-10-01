@@ -1,11 +1,18 @@
-<ActionBar title="Home" class="action-bar">
+<ActionBar title="Camera Gallery" class="action-bar">
+    <ActionItem (tap)="reload()"
+        android.systemIcon="ic_menu_refresh"
+        android.position="actionBar"></ActionItem>
 </ActionBar>
 
-<FlexboxLayout flexDirection="column">
+<FlexboxLayout flexDirection="column" class="wrapper">
     <ScrollView flexGrow="1" id="scrollview">
         <FlexboxLayout flexWrap="wrap" flexDirection="row" justifyContent="space-around">
-            <Image *ngFor="let pic of fileList" width="30%" [src]="pic.viewUrl" 
-                    marginBottom="5" (tap)="picClick(pic)" backgroundColor="green"></Image>
+            <FlexboxLayout class="imageHolder" *ngFor="let pic of fileList" width="48%"
+                           flexDirection="column" (tap)="picClick(pic)">
+                <Image class="imageView" [src]="pic.viewUrl"></Image>
+                <Label class="fileName" [text]="pic.fileName"></Label>
+                <!-- <Label class="fileName" [text]="pic.fileType"></Label> -->  
+            </FlexboxLayout>
         </FlexboxLayout>
     </ScrollView>
 </FlexboxLayout>

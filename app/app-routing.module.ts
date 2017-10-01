@@ -5,8 +5,10 @@ import { SinglePageComponent } from "./single/single.component";
 
 export const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
+    // { path: "", redirectTo: "/single/123/123", pathMatch: "full" },
     { path: "home", loadChildren: "./home/home.module#HomeModule" },
-    { path: "single/:dir/:fileName", component: SinglePageComponent}
+    { path: "single/:dir/:fileName", component: SinglePageComponent},
+    { path: "single/:index", component: SinglePageComponent}
 ];
 
 @NgModule({

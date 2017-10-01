@@ -1,16 +1,36 @@
-<ActionBar title="Single" class="action-bar">
-    <ActionItem (tap)="onSave()"
-        android.systemIcon="ic_menu_save" android.position="actionbar"></ActionItem>
+<ActionBar class="action-bar" text="Single">
+        <!-- <NavigationButton android.systemIcon="ic_menu_back" text="Back to ActionBar" (tap)="goBack()"></NavigationButton> -->
+        <Label class="mdi backBtn" [text]="'mdi-arrow-back' | fonticon" (tap)="goBack()"></Label>
 </ActionBar>
 
-<StackLayout>
-    <Image src="{{ viewUrl }}"></Image>
-    <Label text="{{ fileName }}"></Label>
-</StackLayout>
-<!-- <FlexboxLayout flexDirection="column">
-    <ScrollView flexGrow="1" id="scrollview">
-        <FlexboxLayout flexWrap="wrap" flexDirection="row" justifyContent="space-around">
-            <Image *ngFor="let pic of fileList" width="30%" [src]="pic.viewUrl" marginBottom="5" (tap)="picClick(pic)" backgroundColor="green"></Image>
+<StackLayout class="wrapper" (swipe)="onSwipe($event)">
+    <Image [src]="viewUrl" minHeight="200" backgroundColor="#555555"></Image>
+    <GridLayout rows="auto, *">
+        <StackLayout class="photoInfo" row=0>
+            <Label class="label" text="Filename:"></Label>
+            <Label [text]="fileName"></Label>
+            <GridLayout class="photoMetaData" columns="*, *, *" rows="auto, auto, auto, auto"> 
+                <Label col=0 row=0 class="label" text="Shutter Speed:"></Label>
+                <Label col=0 row=1 [text]="shutterSpeed"></Label>
+
+                <Label col=1 row=0 class="label" text="Aperture:"></Label>
+                <Label col=1 row=1 [text]="aperture"></Label>
+
+                <Label col=2 row=0 class="label" text="ISO:"></Label>
+                <Label col=2 row=1 [text]="iso"></Label>
+            </GridLayout>
+            <Label class="label" text="Date taken:"></Label>
+            <Label [text]="dateTime"></Label>
+        </StackLayout>
+        <FlexboxLayout class="downloadBtn" (tap)="onSave()" row=1>
+            <Label class="mdi downloadIcon" [text]="'mdi-file-download' | fonticon"></Label>
+            <Label text="Download image"></Label>
         </FlexboxLayout>
-    </ScrollView>
-</FlexboxLayout> -->
+    </GridLayout>
+    <!-- <Button icon="res://ic_file_download_black_24dp" class="Dow nloadBtn" text="Download" (tap)="onSave()"></Button> -->
+    
+
+    <!-- <StackLayout verticalAlignmen t="center">
+        <ActivityIndicator [busy]="downloading" [visibility]="downloading ? 'visible' : 'collapse'"></ActivityIndicator>
+    </StackLayout> -->
+</StackLayout>
