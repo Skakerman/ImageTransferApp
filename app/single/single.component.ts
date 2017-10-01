@@ -1,15 +1,15 @@
 import * as Application from "application"
 import * as fs from "file-system";
-import * as constants from "../constants";
+import * as constants from "../shared/constants";
 import * as Toast from "nativescript-toast";
 
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { SwipeGestureEventData } from "ui/gestures";
 
-import { Photos } from "../home/photos";
-import { HttpService } from "../home/http.service";
-import { PhotosService } from "../home/photos.service";
+import { Photos } from "../shared/photos";
+import { HttpService } from "../shared/http.service";
+import { PhotosService } from "../shared/photos.service";
 import { DownloadManager } from 'nativescript-downloadmanager'
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import "rxjs/add/operator/switchMap";
@@ -50,13 +50,7 @@ export class SinglePageComponent implements OnInit {
             this.pageRoute.activatedRoute
                 .switchMap(activatedRoute => activatedRoute.params)
                 .forEach((params) => {
-                    this.index = params["index"];
-                    let jsonInfo = this.photos.fileList[this.index];
-                    this.dir = jsonInfo.dir;
-                    this.fileName = jsonInfo.fileName;
-                    this.fullUrl = jsonInfo.fullUrl;
-                    this.viewUrl = jsonInfo.viewUrl;
-                    this.photoInfoUrl = this.fullUrl + "/info";
+                    this.getJSON(params["index"]);
             });
       }
 
@@ -68,6 +62,16 @@ export class SinglePageComponent implements OnInit {
         // console.log(this.viewUrl);
         // console.log(this.photoInfo);
         this.loadInfo();
+    }
+
+    getJSON(photoIndex) {
+        this.index = photoIndex;
+        let jsonInfo = this.photos.fileList[this.index];
+        this.dir = jsonInfo.dir;
+        this.fileName = jsonInfo.fileName;
+        this.fullUrl = jsonInfo.fullUrl;
+        this.viewUrl = jsonInfo.viewUrl;
+        this.photoInfoUrl = this.fullUrl + "/info";
     }
 
     onSave() {
@@ -120,24 +124,20 @@ export class SinglePageComponent implements OnInit {
     onSwipe(args: SwipeGestureEventData) {
         let photoNav = 0;
         if( args.direction == 1 ) { // Swipe left to right
-            console.log(this.index);
             if( +this.index == 0 ) {
-                console.log("hey");
                 photoNav = this.photos.fileList.length - 1;
             } else {
-                console.log("asdf");
                 photoNav = +this.index - 1;
             }
-            console.log(photoNav);
-            this.router.navigate(["/single/" + (photoNav)])
         } else if( args.direction == 2 ) { // Swipe right to left
             if( +this.index == (this.photos.fileList.length - 1) ) {
                 photoNav = 0;
             } else {
                 photoNav = +this.index + 1;
             }
-            this.router.navigate(["/single/" + (photoNav)])
         }
+        this.router.navigate(["/single/" + (photoNav)])
+        this.getJSON(photoNav);
         this.loadInfo();
     }
 }

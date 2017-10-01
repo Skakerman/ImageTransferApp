@@ -4,7 +4,7 @@ import { NSModuleFactoryLoader } from "nativescript-angular/router";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { TNSFontIconModule } from 'nativescript-ng2-fonticon';
 
-import { Photos } from "./home/photos";
+import { Photos } from "./shared/photos";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { SinglePageComponent } from "./single/single.component";
@@ -19,7 +19,7 @@ import { SinglePageComponent } from "./single/single.component";
         NativeScriptHttpModule,
         TNSFontIconModule.forRoot({
             'mdi': 'material-design-icons.css'
-          })
+        })
     ],
     declarations: [
         AppComponent,

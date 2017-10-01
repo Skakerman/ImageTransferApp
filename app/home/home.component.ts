@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { Photos } from "./photos";
-import { HttpService } from "./http.service";
-import { PhotosService } from "./photos.service";
+import { Photos } from "../shared/photos";
+import { HttpService } from "../shared/http.service";
+import { PhotosService } from "../shared/photos.service";
 import { DownloadManager } from 'nativescript-downloadmanager'
 import { Router } from "@angular/router";
-import * as constants from "../constants";
+import * as constants from "../shared/constants";
+import * as connectivity from "connectivity";
 
 @Component({
     selector: "Home",
@@ -16,6 +17,10 @@ import * as constants from "../constants";
 export class HomeComponent implements OnInit {
     fileList: Array<Object> = [];
 
+    loading: boolean = true;
+    connState: boolean = false;
+    connStatus: string = "Connecting to camera...";
+
     constructor(
         private httpService: HttpService,
         private photosService: PhotosService,
@@ -26,17 +31,23 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.checkConnection();
         this.loadPictures();
     }
 
     loadPictures() {
         this.httpService.getData(constants.PHOTOS_URL)
             .subscribe((result) => {
+                this.connState = true;
+                this.connStatus = "Connected";
                 console.log("In getData results");
                 this.fileList = this.photosService.getPics(result);
             }, (error) => {
+                this.connStatus = "Failed to reach camera";
+                console.log("Can't reach camera");
                 console.log(error);
             });
+        this.loading = false;
     }
 
     picClick(pic) {
@@ -47,6 +58,13 @@ export class HomeComponent implements OnInit {
 
     reload() {
         this.fileList = [];
-        this.loadPictures();
+        this.ngOnInit();
+    }
+
+    checkConnection() {
+        let connectionType = connectivity.getConnectionType();
+        if( connectionType != 1 ) {
+            console.log("Not on WiFi");
+        }
     }
 }

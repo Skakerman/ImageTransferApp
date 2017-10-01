@@ -1,13 +1,19 @@
-<ActionBar class="action-bar" text="Single">
-        <Label class="mdi backBtn" [text]="'mdi-arrow-back' | fonticon" (tap)="goBack()"></Label>
+<ActionBar class="action-bar">
+    <ActionBar.titleView class="abTitle">
+        <GridLayout columns="auto, *, auto" class="abstack">
+            <Label col=0 class="mdi backBtn" [text]="'mdi-arrow-back' | fonticon" (tap)="goBack()"></Label>
+            <!-- <Label col=1 text=""></Label> -->
+            <Label col=2 class="actionBarTitle" [text]="fileName" verticalAlignment="center"></Label>
+        </GridLayout>
+    </ActionBar.titleView>
 </ActionBar>
 
 <StackLayout class="wrapper" (swipe)="onSwipe($event)">
     <Image [src]="viewUrl" minHeight="200" backgroundColor="#555555"></Image>
     <GridLayout rows="auto, *">
         <StackLayout class="photoInfo" row=0>
-            <Label class="label" text="Filename:"></Label>
-            <Label [text]="fileName"></Label>
+            <!-- <Label class="label" text="Filename:"></Label>
+            <Label [text]="fileName"></Label> -->
             <GridLayout class="photoMetaData" columns="*, *, *" rows="auto, auto, auto, auto"> 
                 <Label col=0 row=0 class="label" text="Shutter Speed:"></Label>
                 <Label col=0 row=1 [text]="shutterSpeed"></Label>

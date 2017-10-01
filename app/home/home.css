@@ -4,7 +4,9 @@
     margin-bottom: 5;
 }
 
-.imageView {}
+.statusIcon {
+    font-size: 80;
+}
 
 .fileName {
     text-align: center;

@@ -8,7 +8,7 @@
 }
 
 .photoMetaData {
-    margin-top: 5;
+    /* margin-top: 5; */
     margin-bottom: 5;
 }
 
@@ -34,4 +34,17 @@
 
 .downloadIcon {
     font-size: 80;
+}
+
+.actionBarTitle {
+    font-size: 20;
+    text-align: right;
+}
+
+.abstack {
+    /* background-color: tomato; */
+    /* height: 100%; */
+    /* width: 100%; */
+    vertical-align: center;
+    margin-right: 15;
 }

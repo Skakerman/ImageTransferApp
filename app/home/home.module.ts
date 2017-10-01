@@ -3,11 +3,15 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 
 import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./home.component";
+import { TNSFontIconModule } from 'nativescript-ng2-fonticon';
 
 @NgModule({
     imports: [
         NativeScriptModule,
-        HomeRoutingModule
+        HomeRoutingModule,
+        TNSFontIconModule.forRoot({
+            'mdi': 'material-design-icons.css'
+        })
     ],
     declarations: [
         HomeComponent

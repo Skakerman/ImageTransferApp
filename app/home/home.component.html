@@ -4,14 +4,18 @@
         android.position="actionBar"></ActionItem>
 </ActionBar>
 
-<FlexboxLayout flexDirection="column" class="wrapper">
+<FlexboxLayout flexDirection="column" class="wrapper" justifyContent="center" alignItems="center">
+    <Label class="mdi statusIcon" [text]="'mdi-photo' | fonticon" visibility="{{ loading ? 'collapsed' : 'visible' }}"></Label>
+    <Label class="mdi statusIcon" [text]="'mdi-error-outline' | fonticon" visibility="{{ loading ? 'visible' : 'collapsed' }}"></Label>
+    <Label [text]="connStatus"></Label>
+</FlexboxLayout>
+
+<FlexboxLayout flexDirection="column" class="wrapper" visibility="{{ connState ? 'visible' : 'collapsed' }}">
     <ScrollView flexGrow="1" id="scrollview">
         <FlexboxLayout flexWrap="wrap" flexDirection="row" justifyContent="space-around">
             <FlexboxLayout class="imageHolder" *ngFor="let pic of fileList" width="48%"
                            flexDirection="column" (tap)="picClick(pic)">
                 <Image class="imageView" [src]="pic.viewUrl"></Image>
-                <Label class="fileName" [text]="pic.fileName"></Label>
-                <!-- <Label class="fileName" [text]="pic.fileType"></Label> -->  
             </FlexboxLayout>
         </FlexboxLayout>
     </ScrollView>

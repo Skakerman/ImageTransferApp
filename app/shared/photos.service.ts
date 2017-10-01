@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { Photos } from "./photos";
-import * as constants from "../constants";
+import * as constants from "./constants";
 
 @Injectable()
 export class PhotosService {
