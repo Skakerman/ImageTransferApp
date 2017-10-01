@@ -6,15 +6,11 @@ import * as constants from "../constants";
 @Injectable()
 export class PhotosService {
     constructor(private photos: Photos) {}
-    // fileList: Array<Object> = [];
 
     getPics(data) {
-        console.log("in getPics");
-        console.log(data["errCode"]);
-        //console.dir(data);
+        this.photos.fileList = [];
         let order = 0;
         data.dirs.forEach((dir) => {
-            console.dir(dir);
             dir.files.forEach((file) => {
                 let fileType = file.substr(file.lastIndexOf('.') + 1);
                 if( fileType == "JPG" ) {
@@ -31,15 +27,7 @@ export class PhotosService {
                     "fullUrl": constants.PHOTOS_URL + "/" + dir.name + "/" + file
                 });
                 order++;
-                // this.fileList.push({
-                //     "fileName": "100.jpg",
-                //     "dir": dir.name,
-                //     "viewUrl": "http://placehold.it/100.jpg",
-                //     "fullUrl": "http://placehold.it/100.jpg"
-                // });
             });
-            console.dir(this.photos.fileList);
-            console.log("====");
         });
         return this.photos.fileList;
     }

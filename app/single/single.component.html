@@ -1,5 +1,4 @@
 <ActionBar class="action-bar" text="Single">
-        <!-- <NavigationButton android.systemIcon="ic_menu_back" text="Back to ActionBar" (tap)="goBack()"></NavigationButton> -->
         <Label class="mdi backBtn" [text]="'mdi-arrow-back' | fonticon" (tap)="goBack()"></Label>
 </ActionBar>
 
@@ -27,10 +26,4 @@
             <Label text="Download image"></Label>
         </FlexboxLayout>
     </GridLayout>
-    <!-- <Button icon="res://ic_file_download_black_24dp" class="Dow nloadBtn" text="Download" (tap)="onSave()"></Button> -->
-    
-
-    <!-- <StackLayout verticalAlignmen t="center">
-        <ActivityIndicator [busy]="downloading" [visibility]="downloading ? 'visible' : 'collapse'"></ActivityIndicator>
-    </StackLayout> -->
 </StackLayout>

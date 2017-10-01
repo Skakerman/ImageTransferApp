@@ -23,20 +23,14 @@ export class HttpService {
     }
 
     saveFile(fullUrl) {
-        console.log("In saveFile now");
-        console.log(fullUrl);
         let fileName = fullUrl.substring(fullUrl.lastIndexOf('/') + 1);
-        console.log("FILENAME:", fileName);
         let androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();
-        console.log(androidDownloadsPath);
         let myFolderPath = fs.path.join(androidDownloadsPath, "ImageTransfer");
         let folder = fs.Folder.fromPath(myFolderPath);
         let path = fs.path.join(myFolderPath, fileName);
         let exists = fs.File.exists(path);
         path = fs.path.normalize(path);
-        console.log("Downloading to: " + path);
         return getFile(fullUrl, path).then(response => {
-            console.log("In getFile");
             return false;
         }).catch(err => {
             return false;
