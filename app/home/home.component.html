@@ -5,8 +5,8 @@
 </ActionBar>
 
 <FlexboxLayout flexDirection="column" class="wrapper" justifyContent="center" alignItems="center">
-    <Label class="mdi statusIcon" [text]="'mdi-photo' | fonticon" visibility="{{ loading ? 'collapsed' : 'visible' }}"></Label>
-    <Label class="mdi statusIcon" [text]="'mdi-error-outline' | fonticon" visibility="{{ loading ? 'visible' : 'collapsed' }}"></Label>
+    <Label class="mdi statusIcon" [text]="'mdi-photo' | fonticon" visibility="{{ loading ? 'visible' : 'collapsed' }}"></Label>
+    <Label class="mdi statusIcon" [text]="'mdi-error-outline' | fonticon" visibility="{{ loading ? 'collapsed' : 'visible' }}"></Label>
     <Label [text]="connStatus"></Label>
 </FlexboxLayout>
 

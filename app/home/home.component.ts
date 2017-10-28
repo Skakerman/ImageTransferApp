@@ -31,8 +31,9 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.checkConnection();
-        this.loadPictures();
+        if ( this.checkConnection() ) {
+            this.loadPictures();            
+        };
     }
 
     loadPictures() {
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
                 console.log("In getData results");
                 this.fileList = this.photosService.getPics(result);
             }, (error) => {
+                this.loading = false;
                 this.connStatus = "Failed to reach camera";
                 console.log("Can't reach camera");
                 console.log(error);
@@ -64,7 +66,10 @@ export class HomeComponent implements OnInit {
     checkConnection() {
         let connectionType = connectivity.getConnectionType();
         if( connectionType != 1 ) {
+            this.connStatus = "WiFi must be enabled";
             console.log("Not on WiFi");
+            return false;
         }
+        return true;
     }
 }
